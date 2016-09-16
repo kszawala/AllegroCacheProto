@@ -1,0 +1,8 @@
+target
+src\main\java\com\gft\kszawala\fasttrack\ws\gen
+src\main\java\META-INF
+/.settings/
+/.classpath
+/.project
+/mvnw
+/mvnw.cmd

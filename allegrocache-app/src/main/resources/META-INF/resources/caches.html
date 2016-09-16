@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+<meta charset="utf-8">
+<title>Cache Entries</title>
+
+<LINK rel="stylesheet" href="css/default.css" type="text/css">
+<LINK rel="stylesheet" href="css/div.css" type="text/css">
+<base href="/">
+<!-- needed by $location service (@see https://docs.angularjs.org/error/$location/nobase) -->
+</head>
+<body background="img/angularjs.jpg" ng-controller="CacheController">
+	<div style="background-color: white">
+		<img src="img/cache.jpg" />
+
+		<h3>Cached entries (auction id = {{id}})</h3>
+		<h4 style="color: red">{{errorMsg}}</h4>
+
+		<!-- @see http://stackoverflow.com/questions/24940320/how-to-redirect-using-ng-click -->
+		<div>
+			<button ng-click="navigateTo('/auctions', false)">back</button>
+		</div>
+
+
+		<script
+			src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script
+			src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+
+		<script src="angular/app.js"></script>
+		<script src="angular/controllers/CacheController.js"></script>
+
+		<div>
+			<table>
+				<tr>
+					<td>Cache Timestamp</td>
+					<td>Name</td>
+					<td>Current Bid Price</td>
+					<td>Buy Now Price</td>
+					<td>Bid Count</td>
+					<td>Is BuyNow?</td>
+					<td>Highest bidder</td>
+					<td>Hit count</td>
+					<td></td>
+				</tr>
+				<tbody ng:repeat="c in caches">
+					<tr>
+						<td>{{c.timestamp}}</td>
+						<td>{{c.itName}}</td>
+						<td>{{c.itPrice}}</td>
+						<td>{{c.itBuyNowPrice}}</td>
+						<td>{{c.itBidCount}}</td>
+						<td>{{c.itBuyNowActive}}</td>
+						<td>{{c.itHighBidder}}</td>
+						<td>{{c.itHitCount}}</td>
+						<td><button ng-click="deleteEntry(c)">
+								<img src="img/delete.jpg" />
+							</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

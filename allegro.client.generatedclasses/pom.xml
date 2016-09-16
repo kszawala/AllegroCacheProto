@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.gft.kszawala.fasttrack</groupId>
+  <artifactId>allegro.client.generatedclasses</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>allegro.client.generatedclasses</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  	<build>
+		<plugins>
+			<!-- tag::wsdl[] -->
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.12.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaLanguage>WSDL</schemaLanguage>
+					<generatePackage>com.gft.kszawala.fasttrack.allegro.client.generatedclasses</generatePackage>
+					<generateDirectory>src/main/java/</generateDirectory>
+					<schemas>
+						<schema>
+							<url>https://webapi.allegro.pl/service.php?wsdl</url>
+						</schema>
+					</schemas>
+				</configuration>
+			</plugin>
+			<!-- end::wsdl[] -->
+		</plugins>
+	</build>
+  
+</project>
