@@ -13,14 +13,14 @@
 	<div style="background-color: white">
 		<img src="img/cache.jpg" />
 
-		<h3>Cached entries (auction id = {{id}})</h3>
+		<h3>Cached entries (auction id = {{auctionId}})</h3>
 		<h4 style="color: red">{{errorMsg}}</h4>
+		<h4 style="color: red">{{cacheMsg}}</h4>
 
 		<!-- @see http://stackoverflow.com/questions/24940320/how-to-redirect-using-ng-click -->
 		<div>
 			<button ng-click="navigateTo('/auctions', false)">back</button>
 		</div>
-
 
 		<script
 			src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>

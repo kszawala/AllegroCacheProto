@@ -13,7 +13,7 @@ import org.junit.Test;
 import com.gft.kszawala.fasttrack.allegro.cache.CacheUpdater;
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
 import com.gft.kszawala.fasttrack.model.AuctionContent;
-import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
+import com.gft.kszawala.fasttrack.model.dao.AuctionAvatarDao;
 import com.gft.kszawala.fasttrack.websocket.CacheEventNotifier;
 import com.gft.kszawala.fasttrack.websocket.response.Response;
 import com.gft.kszawala.fasttrack.websocket.response.ResponseFactory;
@@ -76,12 +76,12 @@ public class CacheInitializedStateTest {
 	@Test
 	public void testNewCacheEntryIsSavedWithDao() {
 
-		final AuctionContentDao contentDao = mock(AuctionContentDao.class);
-		final CacheState initializedState = CacheStateTestHelper.createCacheInitializedState(contentDao);
+		final AuctionAvatarDao avatarDao = mock(AuctionAvatarDao.class);
+		final CacheState initializedState = CacheStateTestHelper.createCacheInitializedState(avatarDao);
 		final AuctionAvatar avatar = CacheStateTestHelper.createAvatarWithNoContent();
 
 		initializedState.updateCache(mock(CacheUpdater.class), avatar);
 
-		verify(contentDao).add((AuctionContent) any(), eq(avatar));
+		verify(avatarDao).save(eq(avatar), (AuctionContent) any());
 	}
 }

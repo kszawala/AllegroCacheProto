@@ -8,7 +8,7 @@ import com.gft.kszawala.fasttrack.allegro.client.AllegroClient;
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
 import com.gft.kszawala.fasttrack.model.AuctionContent;
 import com.gft.kszawala.fasttrack.model.UserCredentials;
-import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
+import com.gft.kszawala.fasttrack.model.dao.AuctionAvatarDao;
 import com.gft.kszawala.fasttrack.websocket.CacheEventNotifier;
 import com.gft.kszawala.fasttrack.websocket.response.Response;
 import com.gft.kszawala.fasttrack.websocket.response.ResponseFactory;
@@ -26,32 +26,32 @@ public class CacheInitializedState implements CacheState {
 
 	private final CacheFullState fullState;
 
-	private final AuctionContentDao contentDao;
+	private final AuctionAvatarDao avatarDao;
 
 	private final AllegroClient allegroClient;
 	private final UserCredentials credentials;
 
 	private final ResponseFactory responseFactory;
 
-	public CacheInitializedState(final AuctionContentDao contentDao, final AllegroClient allegroClient,
+	public CacheInitializedState(final AuctionAvatarDao avatarDao, final AllegroClient allegroClient,
 			final CacheFullState fullState, final UserCredentials credentials) {
 
-		this(contentDao, allegroClient, fullState, credentials, new ResponseFactory());
+		this(avatarDao, allegroClient, fullState, credentials, new ResponseFactory());
 	}
 
 	/**
 	 * Constructor dedicated to unit testing - allows for setting custom
 	 * responseFactory.
 	 *
-	 * @param contentDao
+	 * @param avatarDao
 	 * @param allegroClient
 	 * @param fullState
 	 * @param credentials
 	 * @param responseFactory
 	 */
-	public CacheInitializedState(final AuctionContentDao contentDao, final AllegroClient allegroClient,
+	public CacheInitializedState(final AuctionAvatarDao avatarDao, final AllegroClient allegroClient,
 			final CacheFullState fullState, final UserCredentials credentials, final ResponseFactory responseFactory) {
-		this.contentDao = contentDao;
+		this.avatarDao = avatarDao;
 		this.allegroClient = allegroClient;
 		this.fullState = fullState;
 		this.credentials = credentials;
@@ -87,6 +87,7 @@ public class CacheInitializedState implements CacheState {
 		}
 
 		final AuctionContent content = allegroClient.fetchAuctionContent(avatar.getAuctionId(), credentials);
-		contentDao.add(content, avatar);
+		// contentDao.add(content, avatar);
+		avatarDao.save(avatar, content);
 	}
 }

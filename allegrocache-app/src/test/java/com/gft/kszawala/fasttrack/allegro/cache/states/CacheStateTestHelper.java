@@ -7,7 +7,7 @@ import com.gft.kszawala.fasttrack.allegro.client.AllegroClient;
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
 import com.gft.kszawala.fasttrack.model.AuctionContent;
 import com.gft.kszawala.fasttrack.model.UserCredentials;
-import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
+import com.gft.kszawala.fasttrack.model.dao.AuctionAvatarDao;
 import com.gft.kszawala.fasttrack.websocket.response.ResponseFactory;
 
 class CacheStateTestHelper {
@@ -32,30 +32,29 @@ class CacheStateTestHelper {
 
 	static CacheState createCacheInitializedState(final ResponseFactory responseFactory) {
 
-		return new CacheInitializedState(mock(AuctionContentDao.class), mock(AllegroClient.class),
+		return new CacheInitializedState(mock(AuctionAvatarDao.class), mock(AllegroClient.class),
 				mock(CacheFullState.class), mock(UserCredentials.class), responseFactory);
 	}
 
 	static CacheState createCacheInitializedState() {
 
-		return createCacheInitializedState(mock(AuctionContentDao.class));
+		return createCacheInitializedState(mock(AuctionAvatarDao.class));
 	}
 
-	static CacheState createCacheInitializedState(final AuctionContentDao contentDao) {
+	static CacheState createCacheInitializedState(final AuctionAvatarDao avatarDao) {
 
-		return new CacheInitializedState(contentDao, mock(AllegroClient.class), mock(CacheFullState.class),
+		return new CacheInitializedState(avatarDao, mock(AllegroClient.class), mock(CacheFullState.class),
 				mock(UserCredentials.class));
 	}
 
 	static CacheFullState createCacheFullState() {
 
-		return new CacheFullState(mock(AuctionContentDao.class), mock(AllegroClient.class),
-				mock(UserCredentials.class));
+		return new CacheFullState(mock(AuctionAvatarDao.class), mock(AllegroClient.class), mock(UserCredentials.class));
 	}
 
 	static CacheFullState createCacheFullState(final ResponseFactory responseFactory) {
 
-		return new CacheFullState(mock(AuctionContentDao.class), mock(AllegroClient.class), mock(UserCredentials.class),
+		return new CacheFullState(mock(AuctionAvatarDao.class), mock(AllegroClient.class), mock(UserCredentials.class),
 				responseFactory);
 	}
 }

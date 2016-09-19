@@ -9,7 +9,7 @@ import com.gft.kszawala.fasttrack.allegro.cache.states.CacheInitializedState;
 import com.gft.kszawala.fasttrack.allegro.client.AllegroClient;
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
 import com.gft.kszawala.fasttrack.model.UserCredentials;
-import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
+import com.gft.kszawala.fasttrack.model.dao.AuctionAvatarDao;
 
 @Service
 public class CacheUpdaterFactoryImpl implements CacheUpdaterFactory {
@@ -20,11 +20,11 @@ public class CacheUpdaterFactoryImpl implements CacheUpdaterFactory {
 	/**
 	 * {@inheritDoc}
 	 */
-	public CacheUpdater create(final AuctionAvatar avatar, final AuctionContentDao contentDao,
+	public CacheUpdater create(final AuctionAvatar avatar, final AuctionAvatarDao avatarDao,
 			final AllegroClient allegroClient, final UserCredentials credentials) {
 
-		final CacheFullState fullState = new CacheFullState(contentDao, allegroClient, credentials);
-		final CacheInitializedState initState = new CacheInitializedState(contentDao, allegroClient, fullState,
+		final CacheFullState fullState = new CacheFullState(avatarDao, allegroClient, credentials);
+		final CacheInitializedState initState = new CacheInitializedState(avatarDao, allegroClient, fullState,
 				credentials);
 		final CacheUpdater updater = new CacheUpdaterImpl(initState);
 

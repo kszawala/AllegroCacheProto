@@ -3,7 +3,7 @@ package com.gft.kszawala.fasttrack.allegro.cache;
 import com.gft.kszawala.fasttrack.allegro.client.AllegroClient;
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
 import com.gft.kszawala.fasttrack.model.UserCredentials;
-import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
+import com.gft.kszawala.fasttrack.model.dao.AuctionAvatarDao;
 
 /**
  * Interface for factory for CacheUpdater objects.
@@ -14,10 +14,11 @@ public interface CacheUpdaterFactory {
 
 	/**
 	 * @param avatar
-	 * @param contentDao
+	 * @param avatarDao
 	 * @param allegroClient
 	 * @param credentials
 	 * @return a new instance of CacheUpdater
 	 */
-	CacheUpdater create(AuctionAvatar avatar, AuctionContentDao contentDao, AllegroClient allegroClient, UserCredentials credentials);
+	CacheUpdater create(AuctionAvatar avatar, AuctionAvatarDao avatarDao, AllegroClient allegroClient,
+			UserCredentials credentials);
 }

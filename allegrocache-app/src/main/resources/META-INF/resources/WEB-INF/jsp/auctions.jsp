@@ -49,7 +49,7 @@
 								value="${a.auctionId}" /></a></td>
 					<td><c:out value="${a.name}" /></td>
 					<td align="center"><a
-						href="${pageContext.request.contextPath}/caches.html?id=${a.id}"><p
+						href="${pageContext.request.contextPath}/caches.html?id=${a.id}&auctionId=${a.auctionId}&userId=${a.username}"><p
 								style="color: green;" id="cacheCount${a.auctionId}">
 								<c:out value="${fn:length(a.contents)}" />
 							</p></a></td>

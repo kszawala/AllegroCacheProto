@@ -1,12 +1,10 @@
 A multi-module project to package AllegroCache-app with its dependencies so that
 it is self-contained.
 
-BUILD:
-------
+#BUILD:
 mvn clean install
 
-RUN:
-----
+#RUN:
 * Production:
 Windows: java -jar allegrocache-app\target\allegro-cache-app-0.0.1-SNAPSHOT.jar
 Firefox: http://localhost:9090/
@@ -15,6 +13,5 @@ Firefox: http://localhost:9090/
 Windows: java -jar allegrocache-app\target\allegro-cache-app-0.0.1-SNAPSHOT.jar --spring.profiles.active=test
 Firefox: http://localhost:9090/
 
-
-ADDITIONAL NOTES:
+#ADDITIONAL NOTES:
 See allegrocache-app\Readme.md

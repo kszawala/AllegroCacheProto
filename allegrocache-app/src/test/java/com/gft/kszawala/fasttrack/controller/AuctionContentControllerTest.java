@@ -21,30 +21,30 @@ import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
 @RunWith(MockitoJUnitRunner.class)
 public class AuctionContentControllerTest {
 
-	@Mock
-	AuctionContentDao dao;
+	@Mock AuctionContentDao dao;
 
-	@InjectMocks
-	AuctionContentController controller;
+	@InjectMocks AuctionContentController controller;
 
 	@Test
 	public void testHttpGETReturnsCacheEntriesYieldByDao() {
 
 		final List<AuctionContent> expectedEntries = Arrays.asList(mock(AuctionContent.class),
 				mock(AuctionContent.class), mock(AuctionContent.class));
-		final String AUCTION_ID = "auction_id";
+		final String AUCTION_ID = "123user";
 
 		when(dao.getAuctionContents(AUCTION_ID)).thenReturn(expectedEntries);
 
-		assertSame(expectedEntries, controller.getContents(AUCTION_ID));
+		assertSame(expectedEntries, controller.getContents(AUCTION_ID, "123", "user"));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test(expected = IllegalArgumentException.class)
 	public void testHttpGETThrowsOnNonexistentAuctionId() {
 
-		when(dao.getAuctionContents("invalid_auction_id")).thenThrow(IllegalArgumentException.class);
-		controller.getContents("invalid_auction_id");
+		final String cacheId = "invalid_auction_idUserName";
+		when(dao.getAuctionContents(cacheId)).thenThrow(IllegalArgumentException.class);
+
+		controller.getContents(cacheId, "invalid_auction_id", "UserName");
 	}
 
 	@Test

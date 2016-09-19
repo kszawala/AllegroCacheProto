@@ -10,13 +10,13 @@ import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
+import com.gft.kszawala.fasttrack.model.AuctionContent;
 
 @Resource
 @Transactional
 public class AuctionAvatarDao {
 
-	@PersistenceContext
-	private EntityManager em;
+	@PersistenceContext private EntityManager em;
 
 	public List<AuctionAvatar> getUserAvatars(final String username) {
 
@@ -34,8 +34,16 @@ public class AuctionAvatarDao {
 	}
 
 	@Transactional(TxType.REQUIRES_NEW)
-	public void add(final AuctionAvatar auction) {
+	public void add(final AuctionAvatar avatar) {
 
-		em.persist(auction);
+		em.persist(avatar);
+	}
+
+	public void save(final AuctionAvatar avatar, final AuctionContent content) {
+
+		content.setFk(avatar.getAuctionId() + avatar.getUsername());
+		avatar.getContents().add(content);
+
+		em.persist(avatar);
 	}
 }

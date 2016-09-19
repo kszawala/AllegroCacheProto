@@ -14,7 +14,6 @@ import com.gft.kszawala.fasttrack.allegro.client.AllegroClient;
 import com.gft.kszawala.fasttrack.model.AuctionAvatar;
 import com.gft.kszawala.fasttrack.model.UserCredentials;
 import com.gft.kszawala.fasttrack.model.dao.AuctionAvatarDao;
-import com.gft.kszawala.fasttrack.model.dao.AuctionContentDao;
 import com.gft.kszawala.fasttrack.model.dao.UserCredentialsDao;
 
 @Component
@@ -31,20 +30,13 @@ import com.gft.kszawala.fasttrack.model.dao.UserCredentialsDao;
  */
 public class CacheUpdaterSetFactoryImpl implements CacheUpdaterSetFactory {
 
-	@Autowired
-	private AuctionAvatarDao avatarDao;
+	@Autowired private AuctionAvatarDao avatarDao;
 
-	@Autowired
-	private AuctionContentDao contentDao;
+	@Autowired private UserCredentialsDao credentialsDao;
 
-	@Autowired
-	private UserCredentialsDao credentialsDao;
+	@Autowired private AllegroClient allegroClient;
 
-	@Autowired
-	private AllegroClient allegroClient;
-
-	@Autowired
-	private CacheUpdaterFactory factory;
+	@Autowired private CacheUpdaterFactory factory;
 
 	private static final Log logger = LogFactory.getLog(CacheUpdaterSetFactoryImpl.class);
 
@@ -66,7 +58,7 @@ public class CacheUpdaterSetFactoryImpl implements CacheUpdaterSetFactory {
 			final List<AuctionAvatar> avatars = avatarDao.getUserAvatars(uc.getUsername());
 
 			avatars.forEach(a -> {
-				final CacheUpdater updater = factory.create(a, contentDao, allegroClient, uc);
+				final CacheUpdater updater = factory.create(a, avatarDao, allegroClient, uc);
 				cacheUpdaters.add(updater);
 				logger.info("created updater for auction id = " + a.getAuctionId());
 			});

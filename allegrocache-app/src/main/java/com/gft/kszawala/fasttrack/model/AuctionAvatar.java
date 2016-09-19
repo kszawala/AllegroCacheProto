@@ -24,7 +24,7 @@ public class AuctionAvatar {
 	private Long auctionId;
 	private String name;
 
-	@OneToMany(mappedBy = "avatar", cascade = { CascadeType.REMOVE })
+	@OneToMany(mappedBy = "avatar", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 	private List<AuctionContent> contents = new LinkedList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)

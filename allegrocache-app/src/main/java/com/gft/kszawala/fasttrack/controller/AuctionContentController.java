@@ -29,29 +29,34 @@ public class AuctionContentController {
 
 	private static final Log logger = LogFactory.getLog(AuctionContentController.class);
 
-	@Autowired
-	private AuctionContentDao contentDao;
+	@Autowired private AuctionContentDao contentDao;
 
 	/**
 	 * @param id
-	 *            - auction id.
+	 *            - cache entry grouping identifier for an auction of id =
+	 *            auctionId.
+	 * @param auctionId
+	 *            - auction id of the cache entries.
+	 * @param userId
+	 *            - user id for the cache entries.
 	 * @return all cache entries for the given auction id.
 	 * @throws IllegalArgumentException
 	 *             if the given id refers to a nonexistent Auction.
 	 */
-	@RequestMapping(path = "/auctions/{id}", method = RequestMethod.GET)
-	public List<AuctionContent> getContents(@PathVariable final String id) {
+	@RequestMapping(path = "/auctions/{id}{auctionId}{userId}", method = RequestMethod.GET)
+	public List<AuctionContent> getContents(@PathVariable final String id, @PathVariable final String auctionId,
+			@PathVariable final String userId) {
 
-		logger.info("retrieving contents from REST controller for auction id = " + id);
+		logger.info(String.format("Reading caches from REST ctrlr, id=%s, auction=%s, user=%s", id, auctionId, userId));
 
-		return contentDao.getAuctionContents(id);
+		return fetchCaches(id);
 	}
 
 	/**
 	 * Delete cache entry by its id.
 	 *
 	 * @param cacheId
-	 *            - id of the cache entry to delete
+	 *            - id of the cache entry to delete.
 	 * @return list of remaining (after delete) cache entries for the Auction
 	 *         (identified by FK of the deleted cache entry).
 	 */
@@ -64,10 +69,11 @@ public class AuctionContentController {
 
 		contentDao.remove(contentEntryToDel);
 
-		return getContents(contentEntryToDel.getFk()); // TODO: is a
-		// nested call
-		// of
-		// REST handle
-		// method legal?
+		return fetchCaches(contentEntryToDel.getFk());
+	}
+
+	private List<AuctionContent> fetchCaches(final String id) {
+
+		return contentDao.getAuctionContents(id);
 	}
 }
